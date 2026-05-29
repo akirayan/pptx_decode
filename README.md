@@ -17,13 +17,24 @@ Instead of fighting with the GUI, write slide content in Python or YAML and gene
 | `make_template.py` | Generate a minimal widescreen template (copyright-free) |
 | `demo_builder.py` | Usage examples for all library functions |
 
-## Requirements
+## Installation
 
 ```bash
-pip install python-pptx pyyaml
+# Clone the repository
+git clone https://github.com/akirayan/pptx_decode.git
+cd pptx_decode
+
+# Install dependencies
+pip install -r requirements.txt
 ```
 
-Copy the `.py` files to your project folder and add to `sys.path` if needed.
+To use the library from your own project, either copy the `.py` files into your project folder, or add the cloned directory to `sys.path`:
+
+```python
+import sys
+sys.path.insert(0, "/path/to/pptx_decode")
+from pptx_components import *
+```
 
 ## Quick Start
 
