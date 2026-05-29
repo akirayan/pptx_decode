@@ -1,0 +1,31 @@
+%========================== PPTX_DECODE LIBRARY ===============
+
+\title{PPTX Decode and Build}
+\author{遠藤　暁}
+\date{2025年5月}
+
+\begin{document}
+
+\frontmatter
+\maketitle
+\tableofcontents
+
+\let\oldsection\section
+\renewcommand{\section}[1]{\oldsection*{#1}}
+\include{preface}
+\let\section\oldsection
+
+\mainmatter
+
+\include{API}
+
+\include{template_guide}
+
+\appendix
+%\include{appendix_excel}     % 付録A：Excelファイル解析
+
+%\printindex
+
+\backmatter
+
+\end{document}

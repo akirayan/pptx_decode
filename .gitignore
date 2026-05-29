@@ -1,0 +1,20 @@
+# PowerPoint files (generated or confidential — never commit)
+*.pptx
+~$*.pptx
+
+# Python cache
+__pycache__/
+*.pyc
+
+# LaTeX generated files (md2tex output and build artifacts)
+API.tex
+preface.tex
+template_guide.tex
+*.aux
+*.log
+*.toc
+*.out
+*.idx
+*.ilg
+*.ind
+main.pdf
