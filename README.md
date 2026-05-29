@@ -94,11 +94,25 @@ python3 make_template.py        # creates demo_template.pptx (widescreen 16:9)
 ./pptx_decode.py demo_template.pptx layout   # confirm layout indexes
 ```
 
-## Design Philosophy
+## 背景・開発動機
 
-PowerPoint's GUI is hard to control precisely — font sizes, shape positions, and colors require tedious manual adjustment.
-This library treats a slide as a canvas: create a blank slide, remove all placeholders, and draw freely using coordinate-based functions (`add_text`, `add_rect`, `add_line`).
-Template backgrounds and logos (stored in the slide master layer) are inherited even on blank slides.
+PowerPointを使うたびに、同じことで苦労してきた。
+
+フォントサイズの調整、シェイプの位置合わせ、色の設定。GUIの操作は直感的に見えて、実際には細かい数値を思い通りに制御できない。操作するたびに「もっと楽にできないか」と感じていた。
+
+転機はAIとの対話だった。AIがPPTXを生成するPythonスクリプトを提示したとき、「これは使える」と直感した。スクリプトを自分で書けば、座標も色も数値で完全に制御できる。GUIのもどかしさから解放される。
+
+ただし、まずPPTXの内部構造を理解しなければならない。そこで最初に作ったのが `pptx_decode.py` だ。既存のPPTXファイルを読み込んで、構造を人間が読める形で出力する。
+
+構造が理解できたら次は生成だ。最初はPythonスクリプトにスライドの内容を直接書いた。しかし、資料を更新するたびにコードを修正するのは手間がかかる。そこで発想を変えた。**スライドの内容はYAMLで書く。生成はCLIで行う。** `pptx2yaml.py` でPPTXの内容をYAMLに書き出し、`yaml2pptx.py` でYAMLからPPTXを生成する。
+
+### Blank Slide をキャンバスとして使う
+
+コーディングで最も理解に苦しんだのは、スライドマスターのレイアウトに埋め込まれた **Placeholder** というシェイプだった。レイアウトからの継承関係が複雑で、思い通りに動かない場面が何度もあった。
+
+解決策は「逃げること」だった。**Blank Slideを作り、全シェイプを削除する**。残るのは何もない白紙のスライドだ。そこに `add_rect()`、`add_text()`、`add_line()` で自由に描く。テンプレートのロゴや底バーはスライドマスターレイヤーに存在するため、全シェイプを削除しても継承される。
+
+このアプローチは、三十数年前のSunOS XViewプログラミング経験と共鳴している。UIのPanelコンポーネントに不満を感じ、Xlibの描画関数を直接呼び出してPanel上に自由に描いた、あの発想と同じだ。フレームワークの「良い使い方」から外れているかもしれないが、自分が何をしているかが明確で、制御が完全に自分の手にある。
 
 ## License
 
