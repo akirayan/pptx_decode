@@ -71,16 +71,21 @@ LAYOUT_TITLE   = 0    # Title Slide       (CENTER_TITLE + SUBTITLE)
 LAYOUT_CONTENT = 1    # Title and Content (TITLE + BODY)
 LAYOUT_BLANK   = 6    # Blank
 
+# create the ppt object
 prs = create_ppt(TEMPLATE)
 
 # タイトルスライド
-add_section_slide(prs, LAYOUT_TITLE, "タイトル", "サブタイトル")
+add_title_slide(prs, LAYOUT_TITLE, "タイトル", "サブタイトル")
 
 # コンテンツスライド（全シェイプを手動配置）
 slide = add_blank_slide(prs, LAYOUT_BLANK)
 add_content_header(slide, "スライドタイトル", "サブタイトル", font_name="Meiryo UI")
 
-save_presentation(prs, "output.pptx")
+# セッションタイトルスライド
+add_section_slide(prs, LAYOUT_TITLE, "タイトル", "サブタイトル")
+
+# save the file 
+save_ppt(prs, "output.pptx")
 ```
 
 > **NOTE:** `add_blank_slide()` はレイアウトのシェイプをすべて削除した空スライドを返す。テンプレートの背景・ロゴ・底バーはマスターレイヤーに存在するため、`add_blank_slide()` を使っても引き継がれる。
