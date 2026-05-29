@@ -82,7 +82,7 @@ slide = add_blank_slide(prs, LAYOUT_BLANK)
 add_content_header(slide, "スライドタイトル", "サブタイトル", font_name="Meiryo UI")
 
 # セッションタイトルスライド
-add_section_slide(prs, LAYOUT_TITLE, "タイトル", "サブタイトル")
+add_section_slide(prs, LAYOUT_SECTION, "タイトル", "サブタイトル")
 
 # save the file 
 save_ppt(prs, "output.pptx")
